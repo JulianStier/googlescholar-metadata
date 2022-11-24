@@ -7,8 +7,8 @@ __license__   = 'GPL v3' #Based on B&N plugin by Grant Drake
 __copyright__ = '2013, Benjamin Behringer <mail at benjamin-behringer.de>'
 __docformat__ = 'en'
 
-from PyQt4 import QtGui
-from PyQt4.Qt import QLabel, QGridLayout, Qt, QGroupBox, QCheckBox
+from PyQt5 import QtGui
+from PyQt5.Qt import QLabel, QGridLayout, Qt, QGroupBox, QCheckBox
 from calibre.gui2.metadata.config import ConfigWidget as DefaultConfigWidget
 from calibre.utils.config import JSONConfig
 

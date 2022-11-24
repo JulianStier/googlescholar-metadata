@@ -286,9 +286,9 @@ def post_request( j ) :
     data=json.loads(the_page)
 
     for i in xrange(len(data['bibliography'][1])) :
-        print data['bibliography'][0]['entry_ids'][i]
-        print data['bibliography'][1][i]
-        print
+        print(data['bibliography'][0]['entry_ids'][i])
+        print(data['bibliography'][1][i])
+        print()
     
 def main() :
     """Main function"""
@@ -299,15 +299,15 @@ def main() :
         line = line.rstrip()
         data += line + "\n"
 
-    print 'loaded...'
+    print('loaded...')
     data = clear_comments(data)
-    print 'cleared...'
+    print('cleared...')
     bib = Bibparser(data)
     bib.parse()
     data = bib.json()
     post_request( data )
     #print data
-    print 'done...'
+    print('done...')
     
 if __name__ == "__main__" :
     main()

@@ -11,7 +11,7 @@ import re
 import datetime
 from threading import Thread
 from calibre.ebooks.metadata.book.base import Metadata
-from .scholar import ScholarQuerier
+from ._scholarly import _Scholarly as scholarly
 from .bib import Bibparser
 
 class Worker(Thread): # Get details
@@ -36,13 +36,29 @@ class Worker(Thread): # Get details
 
     def _get_results(self):
         """ Download Information from Google Scholar """
-        querier = ScholarQuerier(author=self.query_authors[0], count=self.count)
-        querier.query(self.query_title, bibtex=True)
-        articles = querier.articles
-        if self.count > 0:
-            articles = articles[:self.count]
-        for num, art in enumerate(articles):
-            bibtex_string = art.as_bib()
+        """# author=self.query_authors[0], count=self.count
+        querier = ScholarQuerier()
+        
+        settings = ScholarSettings()
+        settings.set_citation_format(ScholarSettings.CITFORM_BIBTEX)
+        querier.apply_settings(settings)
+        
+        query = SearchScholarQuery()
+        query.set_author(self.query_authors[0])
+        query.set_num_page_results(self.count)
+        #querier.query(self.query_title, bibtex=True)
+        query.set_words_some(self.query_title)
+
+        querier.send_query(query)"""
+        
+        search_query = scholarly.search_pubs(self.query_title)
+        
+        #articles = querier.articles
+        #if self.count > 0:
+        #    articles = articles[:self.count]
+        for num, art in enumerate(search_query):
+            bibtex_string = scholarly.bibtex(pub)
+            #bibtex_string = art.as_citation()
 
             bib = Bibparser(bibtex_string)
             bib.parse()
