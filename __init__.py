@@ -38,7 +38,8 @@ class GoogleScholar(Source):
     def identify(self, log, result_queue, abort, title=None, authors=None,
             identifiers={}, timeout=30):
 
-        import calibre_plugins.googlescholar_metadata.config as cfg
+        #import calibre_plugins.googlescholar_metadata.config as cfg
+        from calibre_plugins.googlescholar_metadata import config as cfg
         from calibre_plugins.googlescholar_metadata.worker import Worker
 
         # Search for results in different thread, as searching takes time and blocks...
